@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout — Adwa Supplements</title>
+  <meta name="description" content="Complete your order with Telebirr, CBE Birr, or Cash on Delivery.">
+  <meta name="theme-color" content="#0B2218">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Noto+Sans+Ethiopic:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/page.css">
+</head>
+<body>
+
+  <div id="header-placeholder"></div>
+
+  <main>
+    <section class="page-content active" id="view-checkout">
+      <div style="background:var(--blue-deep);color:#fff;padding:44px 0;text-align:center;">
+        <h1 style="color:#fff;" data-i18n="checkout_title">Checkout</h1>
+      </div>
+      <div class="section">
+        <div class="wrap">
+          <div class="cart-grid">
+            <form onsubmit="handleCheckoutSubmit(event)">
+              <!-- Delivery Address Block -->
+              <div style="background:var(--bg-card);border:1px solid var(--line-accent);border-radius:var(--radius-md);padding:24px;margin-bottom:24px;">
+                <h3 style="margin-bottom:18px;display:flex;align-items:center;gap:10px;">
+                  <i class="fa-solid fa-location-dot" style="color:var(--accent-bright);"></i>
+                  <span data-i18n="delivery_address">Delivery Information</span>
+                </h3>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:14px;">
+                  <div>
+                    <label style="font-size:0.8rem;font-weight:700;text-transform:uppercase;color:var(--blue-deep);display:block;margin-bottom:6px;" data-i18n="full_name">Full Name</label>
+                    <input type="text" name="fullName" required style="width:100%;padding:12px;border:1.5px solid var(--line-accent);border-radius:var(--radius-sm);">
+                  </div>
+                  <div>
+                    <label style="font-size:0.8rem;font-weight:700;text-transform:uppercase;color:var(--blue-deep);display:block;margin-bottom:6px;" data-i18n="phone_number">Phone Number</label>
+                    <input type="tel" name="phone" required placeholder="09xx xxx xxx" style="width:100%;padding:12px;border:1.5px solid var(--line-accent);border-radius:var(--radius-sm);">
+                  </div>
+                </div>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:14px;">
+                  <div>
+                    <label style="font-size:0.8rem;font-weight:700;text-transform:uppercase;color:var(--blue-deep);display:block;margin-bottom:6px;" data-i18n="city">City</label>
+                    <input type="text" name="city" value="Addis Ababa" required style="width:100%;padding:12px;border:1.5px solid var(--line-accent);border-radius:var(--radius-sm);">
+                  </div>
+                  <div>
+                    <label style="font-size:0.8rem;font-weight:700;text-transform:uppercase;color:var(--blue-deep);display:block;margin-bottom:6px;" data-i18n="subcity">Subcity / Area</label>
+                    <input type="text" name="subcity" placeholder="Bole, Kazanchis, etc." required style="width:100%;padding:12px;border:1.5px solid var(--line-accent);border-radius:var(--radius-sm);">
+                  </div>
+                </div>
+                <div>
+                  <label style="font-size:0.8rem;font-weight:700;text-transform:uppercase;color:var(--blue-deep);display:block;margin-bottom:6px;" data-i18n="address_detail">Detailed Address</label>
+                  <textarea name="address" required placeholder="Building, house number, nearby landmark…" style="width:100%;padding:12px;border:1.5px solid var(--line-accent);border-radius:var(--radius-sm);min-height:80px;"></textarea>
+                </div>
+              </div>
+
+              <!-- Delivery Options -->
+              <div style="background:var(--bg-card);border:1px solid var(--line-accent);border-radius:var(--radius-md);padding:24px;margin-bottom:24px;">
+                <h3 style="margin-bottom:18px;display:flex;align-items:center;gap:10px;">
+                  <i class="fa-solid fa-truck" style="color:var(--accent-bright);"></i>
+                  <span data-i18n="delivery_method">Delivery Option</span>
+                </h3>
+                <div style="display:flex;flex-direction:column;gap:12px;">
+                  <label style="display:flex;align-items:center;gap:12px;padding:12px 14px;border:1.5px solid var(--line-accent);border-radius:var(--radius-sm);cursor:pointer;">
+                    <input type="radio" name="delivery" value="standard" checked style="accent-color:var(--accent-bright);">
+                    <div>
+                      <strong style="color:var(--blue-deep);">Standard Delivery (2–4 Days)</strong>
+                      <div style="font-size:0.8rem;color:var(--ink-muted);">100 ETB (Free on orders over 1,500 ETB)</div>
+                    </div>
+                  </label>
+                  <label style="display:flex;align-items:center;gap:12px;padding:12px 14px;border:1.5px solid var(--line-accent);border-radius:var(--radius-sm);cursor:pointer;">
+                    <input type="radio" name="delivery" value="express" style="accent-color:var(--accent-bright);">
+                    <div>
+                      <strong style="color:var(--blue-deep);">Express Next-Day Dispatch</strong>
+                      <div style="font-size:0.8rem;color:var(--ink-muted);">Addis Ababa only · 250 ETB</div>
+                    </div>
+                  </label>
+                </div>
+              </div>
+
+              <!-- Payment Method Selection -->
+              <div style="background:var(--bg-card);border:1px solid var(--line-accent);border-radius:var(--radius-md);padding:24px;margin-bottom:28px;">
+                <h3 style="margin-bottom:18px;display:flex;align-items:center;gap:10px;">
+                  <i class="fa-solid fa-credit-card" style="color:var(--accent-bright);"></i>
+                  <span data-i18n="payment_method">Payment Method</span>
+                </h3>
+                <div style="display:flex;flex-direction:column;gap:12px;">
+                  <!-- Telebirr -->
+                  <label style="display:flex;align-items:center;gap:14px;padding:14px 16px;border:1.5px solid var(--line-accent);border-radius:var(--radius-md);cursor:pointer;">
+                    <input type="radio" name="payment" value="telebirr" checked style="accent-color:var(--accent-bright);width:18px;height:18px;">
+                    <div style="width:40px;height:40px;border-radius:8px;background:#5B2A86;display:flex;align-items:center;justify-content:center;color:#fff;">
+                      <i class="fa-solid fa-mobile-screen"></i>
+                    </div>
+                    <div>
+                      <strong style="color:var(--blue-deep);">Telebirr Mobile Wallet</strong>
+                      <div style="font-size:0.8rem;color:var(--ink-muted);">Direct QR code &amp; merchant payment</div>
+                    </div>
+                  </label>
+
+                  <!-- CBE Birr -->
+                  <label style="display:flex;align-items:center;gap:14px;padding:14px 16px;border:1.5px solid var(--line-accent);border-radius:var(--radius-md);cursor:pointer;">
+                    <input type="radio" name="payment" value="cbe" style="accent-color:var(--accent-bright);width:18px;height:18px;">
+                    <div style="width:40px;height:40px;border-radius:8px;background:#8B1E1E;display:flex;align-items:center;justify-content:center;color:#fff;">
+                      <i class="fa-solid fa-building-columns"></i>
+                    </div>
+                    <div>
+                      <strong style="color:var(--blue-deep);">Commercial Bank of Ethiopia (CBE Birr)</strong>
+                      <div style="font-size:0.8rem;color:var(--ink-muted);">Direct CBE transfer &amp; verification</div>
+                    </div>
+                  </label>
+
+                  <!-- Cash on Delivery -->
+                  <label style="display:flex;align-items:center;gap:14px;padding:14px 16px;border:1.5px solid var(--line-accent);border-radius:var(--radius-md);cursor:pointer;">
+                    <input type="radio" name="payment" value="cod" style="accent-color:var(--accent-bright);width:18px;height:18px;">
+                    <div style="width:40px;height:40px;border-radius:8px;background:var(--blue-deep);display:flex;align-items:center;justify-content:center;color:#fff;">
+                      <i class="fa-solid fa-hand-holding-dollar"></i>
+                    </div>
+                    <div>
+                      <strong style="color:var(--blue-deep);">Cash on Delivery</strong>
+                      <div style="font-size:0.8rem;color:var(--ink-muted);">Pay driver upon delivery arrival</div>
+                    </div>
+                  </label>
+                </div>
+              </div>
+
+              <button type="submit" class="btn btn-primary btn-block">
+                <span data-i18n="place_order">Complete Order</span> <i class="fa-solid fa-arrow-right"></i>
+              </button>
+            </form>
+
+            <div class="order-summary-box" id="checkoutSummary"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="footer-placeholder"></div>
+  <div id="mobile-nav-placeholder"></div>
+  <script src="js/components.js"></script>
+  <script src="js/global.js"></script>
+</body>
+</html>

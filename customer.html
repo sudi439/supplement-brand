@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Customer Dashboard — Adwa Supplements</title>
+  <meta name="description" content="View your orders and account details.">
+  <meta name="theme-color" content="#0B2218">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Noto+Sans+Ethiopic:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/page.css">
+</head>
+<body>
+
+  <div id="header-placeholder"></div>
+
+  <main>
+    <section class="page-content active" id="view-customer">
+      <div style="background:var(--blue-deep);color:#fff;padding:44px 0;text-align:center;">
+        <h1 style="color:#fff;" data-i18n="customer_title">My Dashboard</h1>
+        <p style="color:var(--accent-primary-bright);margin-top:10px;">Welcome back, Valued Customer</p>
+      </div>
+      <div class="section">
+        <div class="wrap" style="display:grid;gap:32px;">
+          
+          <div style="display:flex;justify-content:flex-end;">
+            <button onclick="handleLogout()" class="btn btn-outline btn-sm">
+              <i class="fa-solid fa-right-from-bracket"></i> Logout
+            </button>
+          </div>
+
+          <!-- Order History -->
+          <div>
+            <h3 style="margin-bottom:16px;">My Recent Orders</h3>
+            <div style="overflow-x:auto;">
+              <table class="admin-table" style="min-width:600px;">
+                <thead>
+                  <tr>
+                    <th>Order ID</th>
+                    <th>Date</th>
+                    <th>Total</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="customerOrdersTbody">
+                  <!-- Populated by JS -->
+                </tbody>
+              </table>
+            </div>
+            <div id="customerEmptyState" style="display:none;text-align:center;padding:40px;background:var(--bg-card);border:1px solid var(--line-accent);border-radius:var(--radius-md);">
+              <i class="fa-solid fa-box-open" style="font-size:2.5rem;color:var(--accent-primary);margin-bottom:16px;"></i>
+              <p style="color:var(--ink-muted);font-weight:600;">You haven't placed any orders yet.</p>
+              <a href="shop.html" class="btn btn-primary btn-sm" style="margin-top:16px;">Browse Shop</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="footer-placeholder"></div>
+  <div id="mobile-nav-placeholder"></div>
+  <script src="js/components.js"></script>
+  <script src="js/global.js"></script>
+</body>
+</html>

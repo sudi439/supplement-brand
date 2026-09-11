@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shop — Adwa Supplements</title>
+  <meta name="description" content="Browse our full catalog of premium supplements, whey protein isolates, creatine, pre-workouts, and Ethiopian botanical formulas.">
+  <meta name="theme-color" content="#0B2218">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Noto+Sans+Ethiopic:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/page.css">
+</head>
+<body>
+
+  <div id="header-placeholder"></div>
+
+  <main>
+    <section class="page-content active" id="view-shop">
+      <div class="shop-hero-banner">
+        <div class="wrap">
+          <span class="eyebrow" style="color:var(--accent-bright);">Online Store</span>
+          <h1>Supplements &amp; Performance Catalog</h1>
+          <p>Authentic sports nutrition, whey isolates, creatine, pre-workouts, and Ethiopian health formulas.</p>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="wrap">
+          <div class="shop-layout">
+            <!-- Mobile overlay -->
+            <div class="shop-filter-overlay" id="shopFilterOverlay" onclick="toggleMobileFilters(false)"></div>
+            <!-- Desktop Sticky Sidebar -->
+            <aside class="shop-sidebar" id="shopSidebar">
+              <div class="filter-heading">
+                <span><i class="fa-solid fa-sliders"></i> <span data-i18n="filters_title">Filters</span></span>
+                <button class="mobile-close-filter" onclick="toggleMobileFilters(false)"><i class="fa-solid fa-xmark"></i></button>
+              </div>
+              <div class="filter-group">
+                <div class="filter-heading" data-i18n="filter_category">Category</div>
+                <div class="filter-list" id="sideCategoryList"></div>
+              </div>
+              <div class="filter-group">
+                <div class="filter-heading" data-i18n="filter_price">Max Price</div>
+                <input type="range" id="priceRangeSlider" min="500" max="10000" step="100" value="10000" oninput="onPriceChange(this.value)" style="width:100%;accent-color:var(--accent-primary);">
+                <div style="display:flex;justify-content:space-between;font-size:0.8rem;color:var(--ink-muted);margin-top:6px;">
+                  <span>500 ETB</span>
+                  <span id="priceRangeDisplay" style="font-weight:700;color:var(--blue-deep);">10,000+ ETB</span>
+                </div>
+              </div>
+              <div class="filter-group">
+                <div class="filter-heading" data-i18n="filter_rating">Rating</div>
+                <div class="filter-list" id="sideRatingList"></div>
+              </div>
+              <button class="btn btn-outline btn-block btn-sm" onclick="resetFilters()">
+                <i class="fa-solid fa-rotate-left"></i> <span data-i18n="reset_filters">Reset Filters</span>
+              </button>
+            </aside>
+
+            <!-- Main Shop Catalog -->
+            <div class="shop-main-catalog">
+              <!-- Search Bar -->
+              <div class="search-container">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" id="shopSearchInput" placeholder="Search products or categories…" data-i18n-placeholder="search_placeholder" oninput="onSearchInput(this.value)">
+              </div>
+
+              <!-- Category Pills Row -->
+              <div class="cat-row" id="shopCategoryRow" style="margin-bottom:20px;"></div>
+
+              <div class="shop-toolbar">
+                <span class="result-count" id="resultCount">Loading products…</span>
+                <button class="btn btn-outline btn-sm mobile-filter-btn" onclick="toggleMobileFilters(true)">
+                  <i class="fa-solid fa-sliders"></i> Filters
+                </button>
+              </div>
+
+              <div class="product-grid" id="shopGrid"></div>
+
+              <div id="shopEmptyState" style="display:none;text-align:center;padding:70px 20px;">
+                <i class="fa-solid fa-magnifying-glass" style="font-size:3rem;color:var(--accent-primary);margin-bottom:14px;"></i>
+                <h3>No matching products found</h3>
+                <p style="color:var(--ink-muted);margin-top:8px;">Try modifying your search or reset the filters.</p>
+                <button class="btn btn-outline" style="margin-top:20px;" onclick="resetFilters()">Reset Filters</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="footer-placeholder"></div>
+  <div id="mobile-nav-placeholder"></div>
+  <script src="js/components.js"></script>
+  <script src="js/global.js"></script>
+</body>
+</html>

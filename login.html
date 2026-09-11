@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login — Adwa Supplements</title>
+  <meta name="description" content="Log in to your Adwa Supplements account.">
+  <meta name="theme-color" content="#0B2218">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Noto+Sans+Ethiopic:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/page.css">
+</head>
+<body>
+
+  <div id="header-placeholder"></div>
+
+  <main>
+    <section class="page-content active" id="view-login">
+      <div style="background:var(--blue-deep);color:#fff;padding:44px 0;text-align:center;">
+        <h1 style="color:#fff;" data-i18n="login_title">Account Portal</h1>
+      </div>
+      <div class="section">
+        <div class="wrap" style="display:flex;justify-content:center;padding:40px 0;">
+          <div style="width:100%;max-width:440px;background:var(--bg-card);border:1px solid var(--line-accent);border-radius:var(--radius-lg);padding:40px;box-shadow:var(--shadow-md);">
+            <div style="text-align:center;margin-bottom:30px;">
+              <i class="fa-solid fa-user-circle" style="font-size:3rem;color:var(--accent-bright);margin-bottom:14px;"></i>
+              <h2 style="font-size:1.6rem;color:var(--blue-deep);">Welcome Back</h2>
+              <p style="color:var(--ink-muted);font-size:0.9rem;margin-top:8px;">Sign in to access your dashboard</p>
+            </div>
+            
+            <form onsubmit="handleLogin(event)">
+              <div style="margin-bottom:16px;">
+                <label style="font-size:0.8rem;font-weight:700;text-transform:uppercase;color:var(--blue-deep);display:block;margin-bottom:6px;">Email Address</label>
+                <input type="email" id="loginEmail" required placeholder="manager@adwa.com or customer@adwa.com" style="width:100%;padding:14px;border:1.5px solid var(--line-accent);border-radius:var(--radius-sm);">
+              </div>
+              <div style="margin-bottom:24px;">
+                <label style="font-size:0.8rem;font-weight:700;text-transform:uppercase;color:var(--blue-deep);display:block;margin-bottom:6px;">Password</label>
+                <input type="password" id="loginPass" required placeholder="••••••••" style="width:100%;padding:14px;border:1.5px solid var(--line-accent);border-radius:var(--radius-sm);">
+              </div>
+              
+              <div id="loginErrorMsg" style="display:none;color:var(--red);font-size:0.85rem;margin-bottom:16px;text-align:center;font-weight:700;">
+                <i class="fa-solid fa-circle-exclamation"></i> Invalid email or password.
+              </div>
+
+              <button type="submit" class="btn btn-primary btn-block">
+                Sign In <i class="fa-solid fa-arrow-right"></i>
+              </button>
+            </form>
+            
+            <div style="text-align:center;margin-top:24px;font-size:0.85rem;color:var(--ink-muted);padding-top:20px;border-top:1px solid var(--line);">
+              Demo Accounts:<br>
+              <strong style="color:var(--blue-deep);">Manager:</strong> admin@adwa.com / Adwa2026<br>
+              <strong style="color:var(--blue-deep);">Customer:</strong> customer@adwa.com / Adwa2026
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="footer-placeholder"></div>
+  <div id="mobile-nav-placeholder"></div>
+  <script src="js/components.js"></script>
+  <script src="js/global.js"></script>
+</body>
+</html>

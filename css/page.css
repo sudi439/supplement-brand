@@ -1,0 +1,779 @@
+/* ============================================================
+   PAGE.CSS — Variable Aliases & Missing Design Tokens
+   Maps legacy variable names (from the original single-file SPA)
+   to the new global.css design system variables.
+   ============================================================ */
+
+:root {
+  /* Legacy → New Mappings */
+  --green-deep: var(--blue-deep);
+  --green-darker: var(--blue-darker);
+  --gold: var(--accent-primary);
+  --gold-soft: var(--accent-soft);
+  --gold-bright: var(--accent-bright);
+  --line-gold: var(--line-accent);
+  --line-accent: rgba(79, 70, 229, 0.15);
+  --off-white: var(--bg-body);
+  --ink-soft: var(--ink-muted);
+  --card: var(--bg-card);
+  --font-head: var(--font-body);
+
+  /* Button gradient aliases */
+  --accent-primary-light: var(--accent-light);
+  --accent-primary-grad: var(--accent-grad);
+  --accent-primary-grad-hover: var(--accent-grad-hover);
+}
+
+/* ============================================================
+   TOAST NOTIFICATION
+   ============================================================ */
+.toast {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: var(--blue-darker);
+  color: #fff;
+  padding: 14px 24px;
+  border-radius: var(--radius-md);
+  font-size: 0.88rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  z-index: 1100;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s ease;
+  box-shadow: var(--shadow-lg);
+  max-width: 90%;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.toast i {
+  color: var(--accent-bright);
+  font-size: 1.1rem;
+}
+
+/* ============================================================
+   ADMIN-SPECIFIC STYLES
+   ============================================================ */
+.admin-shell {
+  display: grid;
+  grid-template-columns: 1fr;
+  min-height: 100vh;
+}
+
+@media (min-width: 900px) {
+  .admin-shell {
+    grid-template-columns: 240px 1fr;
+  }
+}
+
+.admin-sidebar {
+  background: var(--blue-darker);
+  color: var(--bg-body);
+  padding: 24px 18px;
+}
+
+.admin-sidebar button {
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-body);
+}
+
+.admin-main {
+  padding: 28px 24px 50px;
+  background: var(--bg-surface);
+  min-height: 100vh;
+}
+
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+@media (min-width: 768px) {
+  .stat-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.stat-card {
+  background: var(--bg-card);
+  border-radius: var(--radius-md);
+  padding: 20px;
+  border: 1px solid var(--line);
+}
+
+.stat-card .num {
+  font-family: var(--font-body);
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--blue-deep);
+}
+
+.stat-card .lbl {
+  font-size: 0.76rem;
+  color: var(--ink-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-top: 4px;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+}
+
+.admin-table th {
+  text-align: left;
+  background: var(--bg-surface);
+  color: var(--blue-deep);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  padding: 12px 14px;
+}
+
+.admin-table td {
+  padding: 12px 14px;
+  border-top: 1px solid var(--line);
+  vertical-align: middle;
+}
+
+.admin-table img.mini-thumb {
+  width: 42px;
+  height: 42px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.tag-status {
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.tag-status.pending { background: #fdf1d0; color: #8a6512; }
+.tag-status.shipped { background: #dbeafd; color: #1a5a9c; }
+.tag-status.delivered { background: #dcf3e0; color: #1e7a34; }
+
+/* ============================================================
+   MISC HELPERS
+   ============================================================ */
+.text-center { text-align: center; }
+.hidden { display: none !important; }
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.site-footer {
+  background: var(--blue-darker);
+  color: rgba(250, 247, 240, 0.75);
+  padding: 50px 0 24px;
+  margin-top: 20px;
+}
+
+.footer-grid {
+  display: grid;
+  gap: 32px;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 768px) {
+  .footer-grid {
+    grid-template-columns: 1.4fr 1fr 1fr 1fr;
+  }
+}
+
+.footer-grid h4 {
+  color: #fff;
+  font-size: 0.95rem;
+  margin-bottom: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.footer-grid ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footer-grid a:hover {
+  color: var(--accent-primary);
+}
+
+.footer-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-body);
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 12px;
+}
+
+.footer-social {
+  display: flex;
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.footer-social a {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(250, 247, 240, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, color 0.2s;
+}
+
+.footer-social a:hover {
+  background: var(--accent-primary);
+  color: var(--blue-darker);
+}
+
+.footer-bottom {
+  border-top: 1px solid rgba(250, 247, 240, 0.12);
+  margin-top: 36px;
+  padding-top: 20px;
+  font-size: 0.8rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: space-between;
+}
+
+/* ============================================================
+   MOBILE STICKY BUY BAR (Product Detail)
+   ============================================================ */
+.mobile-sticky-buy {
+  display: none;
+  position: fixed;
+  bottom: 80px;
+  left: 16px;
+  right: 16px;
+  background: var(--bg-card);
+  border: 1px solid var(--line-accent);
+  border-radius: var(--radius-full);
+  padding: 8px 8px 8px 20px;
+  z-index: 990;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.12);
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+@media (max-width: 768px) {
+  .mobile-sticky-buy.active {
+    display: flex;
+  }
+}
+
+/* ============================================================
+   MOBILE SHOP LAYOUT & FILTERS
+   ============================================================ */
+.shop-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.mobile-filter-btn {
+  display: flex;
+}
+
+@media (min-width: 1024px) {
+  .mobile-filter-btn {
+    display: none;
+  }
+}
+
+@media (max-width: 1023px) {
+  .shop-sidebar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 85%;
+    max-width: 340px;
+    background: var(--bg-body);
+    z-index: 2000;
+    padding: 24px;
+    border-left: 1px solid var(--line-accent);
+    transform: translateX(100%);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    overflow-y: auto;
+    display: block !important;
+  }
+  
+  .shop-sidebar.open {
+    transform: translateX(0);
+  }
+  
+  .shop-sidebar .filter-heading:first-child {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 16px;
+    margin-bottom: 20px;
+  }
+  
+  .shop-sidebar .mobile-close-filter {
+    display: block;
+    background: none;
+    border: none;
+    font-size: 1.4rem;
+    color: var(--blue-deep);
+    cursor: pointer;
+  }
+}
+
+@media (min-width: 1024px) {
+  .shop-sidebar .mobile-close-filter {
+    display: none;
+  }
+}
+
+/* Shop filter overlay */
+.shop-filter-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(6, 22, 15, 0.6);
+  backdrop-filter: blur(6px);
+  z-index: 1999;
+}
+
+.shop-filter-overlay.open {
+  display: block;
+}
+
+/* Variable alias for accent-primary-bright used in some components */
+:root {
+  --accent-primary-bright: var(--accent-bright);
+}
+
+/* ============================================================
+   MOBILE SHOP & CATALOG RESPONSIVE OVERRIDES (NATIVE APP UI)
+   ============================================================ */
+.shop-hero-banner {
+  background: var(--blue-deep);
+  color: #fff;
+  padding: 48px 0 36px;
+  border-bottom: 1px solid var(--line-accent);
+}
+
+.shop-hero-banner h1 {
+  font-size: 2.4rem;
+  color: #fff;
+  margin-top: 4px;
+  line-height: 1.25;
+  font-family: var(--font-body);
+}
+
+.shop-hero-banner p {
+  color: rgba(250, 247, 240, 0.82);
+  margin-top: 6px;
+  font-size: 1.02rem;
+  line-height: 1.4;
+}
+
+@media (max-width: 768px) {
+  /* 1. Header: Clean App Bar */
+  .site-header {
+    height: 54px !important;
+    background: #ffffff !important;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04) !important;
+  }
+
+  .header-inner {
+    padding: 0 12px !important;
+    height: 54px !important;
+  }
+
+  .brand-logo {
+    gap: 8px !important;
+  }
+
+  .brand-emblem {
+    width: 30px !important;
+    height: 30px !important;
+  }
+
+  .brand-title {
+    font-size: 1.15rem !important;
+    font-weight: 800 !important;
+  }
+
+  .brand-subtitle {
+    display: none !important;
+  }
+
+  .header-actions .lang-toggle,
+  .header-actions .icon-btn[aria-label="Search products"],
+  .header-actions .icon-btn[aria-label="User Profile"] {
+    display: none !important;
+  }
+
+  .header-actions {
+    gap: 8px !important;
+  }
+
+  .header-actions .icon-btn {
+    width: 36px !important;
+    height: 36px !important;
+    font-size: 0.88rem !important;
+    border: 1px solid rgba(0, 0, 0, 0.08) !important;
+    background: #f8fafc !important;
+  }
+
+  /* 2. Hide bulky desktop hero banner on mobile shop page */
+  .shop-hero-banner {
+    display: none !important;
+  }
+
+  /* 3. Section & Container reset */
+  body {
+    padding-bottom: 74px !important;
+    background: #f8fafc !important;
+    overflow-x: hidden !important;
+  }
+
+  .wrap {
+    padding: 0 12px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .section {
+    padding: 12px 0 30px !important;
+  }
+
+  .shop-layout {
+    display: block !important;
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  .shop-main-catalog {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    overflow: hidden !important;
+    box-sizing: border-box !important;
+  }
+
+  /* 4. Native-Style Search Bar */
+  .search-container {
+    position: relative !important;
+    margin-bottom: 12px !important;
+    width: 100% !important;
+  }
+
+  .search-container input {
+    height: 42px !important;
+    border-radius: 22px !important;
+    background: #ffffff !important;
+    border: 1.5px solid rgba(0, 0, 0, 0.08) !important;
+    font-size: 0.86rem !important;
+    padding: 0 16px 0 40px !important;
+    color: #0f172a !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03) !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .search-container input:focus {
+    border-color: var(--blue-deep) !important;
+    box-shadow: 0 0 0 3px rgba(11, 34, 24, 0.08) !important;
+  }
+
+  .search-container i {
+    left: 15px !important;
+    font-size: 0.85rem !important;
+    color: #64748b !important;
+  }
+
+  /* 5. Sleek Horizontally Scrollable Category Chips */
+  .cat-row {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    gap: 8px !important;
+    padding: 2px 2px 8px 2px !important;
+    margin-bottom: 12px !important;
+    -webkit-overflow-scrolling: touch !important;
+    scrollbar-width: none !important;
+    width: 100% !important;
+  }
+
+  .cat-row::-webkit-scrollbar {
+    display: none !important;
+  }
+
+  .cat-row .pill {
+    flex: 0 0 auto !important;
+    padding: 7px 14px !important;
+    font-size: 0.74rem !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.02em !important;
+    border-radius: 20px !important;
+    border: 1px solid rgba(0, 0, 0, 0.09) !important;
+    background: #ffffff !important;
+    color: #334155 !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04) !important;
+    white-space: nowrap !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    cursor: pointer !important;
+  }
+
+  .cat-row .pill.active {
+    background: var(--blue-deep) !important;
+    color: #ffffff !important;
+    border-color: var(--blue-deep) !important;
+    box-shadow: 0 3px 8px rgba(11, 34, 24, 0.2) !important;
+  }
+
+  .cat-row .pill.active i {
+    color: var(--accent-bright) !important;
+  }
+
+  /* 6. Native App Shop Sub-Bar (Results count + Filter trigger) */
+  .shop-toolbar {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    margin-bottom: 12px !important;
+    padding: 0 2px !important;
+  }
+
+  .result-count {
+    font-size: 0.78rem !important;
+    font-weight: 700 !important;
+    color: #475569 !important;
+  }
+
+  .mobile-filter-btn {
+    padding: 6px 14px !important;
+    font-size: 0.76rem !important;
+    font-weight: 700 !important;
+    border-radius: 18px !important;
+    border: 1px solid rgba(0, 0, 0, 0.12) !important;
+    background: #ffffff !important;
+    color: var(--blue-deep) !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04) !important;
+    cursor: pointer !important;
+  }
+
+  /* 7. STRICT 2-COLUMN MOBILE PRODUCT GRID (GUARANTEED SIDE-BY-SIDE) */
+  .product-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 10px !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  .product-card {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    border-radius: 14px !important;
+    border: 1px solid rgba(0, 0, 0, 0.08) !important;
+    background: #ffffff !important;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    overflow: hidden !important;
+    position: relative !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Badges overlay */
+  .product-badges-wrap {
+    top: 6px !important;
+    left: 6px !important;
+    right: 6px !important;
+    gap: 4px !important;
+    display: flex !important;
+    flex-wrap: wrap !important;
+    pointer-events: none !important;
+  }
+
+  .product-badge {
+    font-size: 0.52rem !important;
+    font-weight: 800 !important;
+    padding: 2px 5px !important;
+    border-radius: 4px !important;
+    max-width: 76px !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    line-height: 1.2 !important;
+    letter-spacing: 0.02em !important;
+  }
+
+  /* 1:1 Product Thumbnail container */
+  .product-thumb {
+    width: 100% !important;
+    max-width: 100% !important;
+    aspect-ratio: 1 / 1 !important;
+    height: auto !important;
+    padding: 8px !important;
+    background: #f8fafc !important;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    box-sizing: border-box !important;
+    min-width: 0 !important;
+    overflow: hidden !important;
+  }
+
+  .product-thumb img {
+    max-width: 88% !important;
+    max-height: 88% !important;
+    width: auto !important;
+    height: auto !important;
+    object-fit: contain !important;
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.08)) !important;
+    transition: none !important;
+  }
+
+  /* Card Content */
+  .product-info {
+    padding: 8px 8px 10px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    flex: 1 !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  .product-meta-row {
+    margin-bottom: 3px !important;
+    gap: 4px !important;
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    overflow: hidden !important;
+  }
+
+  .product-cat {
+    font-size: 0.58rem !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.04em !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    color: var(--accent-primary) !important;
+  }
+
+  .product-format-tag {
+    display: none !important;
+  }
+
+  .product-title {
+    font-size: 0.76rem !important;
+    line-height: 1.25 !important;
+    font-weight: 700 !important;
+    color: #0f172a !important;
+    margin: 2px 0 4px 0 !important;
+    height: 1.9rem !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+  }
+
+  .product-rating {
+    font-size: 0.65rem !important;
+    gap: 2px !important;
+    margin-bottom: 4px !important;
+    color: #f59e0b !important;
+  }
+
+  .rating-num {
+    display: none !important;
+  }
+
+  .product-highlight-badge {
+    display: none !important;
+  }
+
+  .product-price-row {
+    margin-top: auto !important;
+    padding-top: 6px !important;
+    border-top: 1px solid rgba(0, 0, 0, 0.06) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 4px !important;
+  }
+
+  .price-col {
+    min-width: 0 !important;
+    overflow: hidden !important;
+  }
+
+  .price-label {
+    display: none !important;
+  }
+
+  .product-price {
+    font-size: 0.88rem !important;
+    font-weight: 800 !important;
+    color: var(--blue-deep) !important;
+    white-space: nowrap !important;
+  }
+
+  .quick-add-btn {
+    width: 30px !important;
+    height: 30px !important;
+    min-width: 30px !important;
+    border-radius: 50% !important;
+    background: var(--blue-deep) !important;
+    color: #ffffff !important;
+    border: none !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 0.78rem !important;
+    box-shadow: 0 2px 5px rgba(11, 34, 24, 0.2) !important;
+  }
+
+  .quick-add-btn:active {
+    transform: scale(0.9) !important;
+  }
+}

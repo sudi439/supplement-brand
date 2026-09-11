@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product — Adwa Supplements</title>
+  <meta name="description" content="View product details, specifications, and add to cart.">
+  <meta name="theme-color" content="#0B2218">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Noto+Sans+Ethiopic:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/page.css">
+</head>
+<body>
+
+  <div id="header-placeholder"></div>
+
+  <main>
+    <section class="page-content active" id="view-product">
+      <div class="section">
+        <div class="wrap" id="productDetailWrap"></div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Mobile Sticky Buy Bar -->
+  <div class="mobile-sticky-buy" id="mobileStickyBuyBar">
+    <span class="pd-price" id="mobileStickyPrice"></span>
+    <button class="btn btn-primary" onclick="addStickyDetailToCart()">
+      <i class="fa-solid fa-bag-shopping"></i> Add to Cart
+    </button>
+  </div>
+
+  <div id="footer-placeholder"></div>
+  <div id="mobile-nav-placeholder"></div>
+  <script src="js/components.js"></script>
+  <script src="js/global.js"></script>
+</body>
+</html>
