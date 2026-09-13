@@ -1398,6 +1398,7 @@
   /* ---- Ensure sticky works: remove overflow clipping from ALL ancestors ---- */
   .page-shop,
   .page-shop main,
+  .page-shop #header-placeholder,
   .page-shop .page-content,
   .page-shop .section,
   .page-shop .wrap,
@@ -1406,11 +1407,15 @@
     overflow: visible !important;
   }
 
-  /* ---- Dark Blue Header ---- */
-  .page-shop .site-header {
+  /* ---- Sticky header wrapper ---- */
+  .page-shop #header-placeholder {
     position: sticky !important;
     top: 0 !important;
     z-index: 500 !important;
+  }
+
+  /* ---- Dark Blue Header ---- */
+  .page-shop .site-header {
     background: var(--blue-deep) !important;
     border-bottom: none !important;
     box-shadow: none !important;
