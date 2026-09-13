@@ -708,6 +708,161 @@ function productCardHTML(p) {
   `;
 }
 
+/* ---------- Mobile Shop: Section Definitions (Category Groupings) ---------- */
+const MOBILE_SHOP_SECTIONS = [
+  {
+    title: 'Bestsellers',
+    title_am: 'ተወዳጅ ምርቶች',
+    filter: (products) => [...products].sort((a, b) => b.rating - a.rating || b.stock - a.stock).slice(0, 9),
+    viewAllCategory: 'All'
+  },
+  {
+    title: 'Creatine',
+    title_am: 'ክሪያቲን',
+    filter: (products) => products.filter(p => p.category === 'Creatine').slice(0, 9),
+    viewAllCategory: 'Creatine'
+  },
+  {
+    title: 'Protein & Mass',
+    title_am: 'ፕሮቲን',
+    filter: (products) => products.filter(p => p.category === 'Whey Isolate' || p.category === 'Mass Gainer').slice(0, 9),
+    viewAllCategory: 'Whey Isolate'
+  },
+  {
+    title: 'Pre-Workout & Energy',
+    title_am: 'ፕሪ-ወርክአውት',
+    filter: (products) => products.filter(p => p.category === 'Pre-Workout' || p.category === 'Fat Burner').slice(0, 9),
+    viewAllCategory: 'Pre-Workout'
+  },
+  {
+    title: 'Health & Wellness',
+    title_am: 'ጤና እና ኦሜጋ-3',
+    filter: (products) => products.filter(p => p.category === 'Multivitamins' || p.category === 'Daily Wellness' || p.category === 'BCAAs / EAAs').slice(0, 9),
+    viewAllCategory: 'Multivitamins'
+  },
+  {
+    title: 'Ethiopian Botanicals',
+    title_am: 'የአገር በቀል ዕፅዋት',
+    filter: (products) => products.filter(p => p.category === 'Botanicals').slice(0, 9),
+    viewAllCategory: 'Botanicals'
+  }
+];
+
+/* ---------- Mobile Product Card Component (Compact Carousel Card) ---------- */
+function mobileProductCardHTML(p) {
+  const isOutOfStock = p.stock <= 0;
+  const title = currentLang === 'am' && p.name_am ? p.name_am : p.name;
+  const cat = currentLang === 'am' && p.category_am ? p.category_am : p.category;
+  const format = currentLang === 'am' && p.format_am ? p.format_am : p.format;
+  const primaryBadge = currentLang === 'am' && p.badge_am ? p.badge_am : p.badge;
+  const addToCartText = currentLang === 'am' ? 'ወደ ቅርጫት' : 'Add to Cart';
+  const priceNum = Number(p.price).toLocaleString('en-US');
+
+  return `
+    <div class="mobile-product-card" data-id="${p.id}">
+      <div class="mpc-image-wrap" onclick="window.location.href='product.html?id=${p.id}'">
+        ${primaryBadge ? `<span class="mpc-badge${isOutOfStock ? ' badge-out' : ''}">${isOutOfStock ? escapeHtml(currentLang === 'am' ? 'አልቋል' : 'Out') : escapeHtml(primaryBadge)}</span>` : (isOutOfStock ? `<span class="mpc-badge badge-out">${escapeHtml(currentLang === 'am' ? 'አልቋል' : 'Out')}</span>` : '')}
+        <button class="mpc-wishlist" aria-label="Wishlist" onclick="event.stopPropagation();">
+          <i class="fa-regular fa-heart"></i>
+        </button>
+        ${p.image
+          ? `<img src="${escapeHtml(p.image)}" alt="${escapeHtml(title)}" loading="lazy" onerror="this.onerror=null; this.src='images/tikur-azmud.jpg';">`
+          : `<div style="font-size:2rem;color:var(--accent-primary);font-weight:800;">${escapeHtml(title.charAt(0))}</div>`}
+      </div>
+      <div class="mpc-info">
+        <div class="mpc-brand">${escapeHtml(cat)}</div>
+        <div class="mpc-name" onclick="window.location.href='product.html?id=${p.id}'">${escapeHtml(title)}</div>
+        ${format ? `<div class="mpc-format">${escapeHtml(format)}</div>` : ''}
+        <div class="mpc-price">${priceNum} <span class="mpc-currency">ETB</span></div>
+      </div>
+      <button class="mpc-add-to-cart" ${isOutOfStock ? 'disabled' : ''} onclick="addToCart(${p.id}, 1); event.stopPropagation();" aria-label="Add ${escapeHtml(title)} to cart">
+        <i class="fa-solid fa-cart-shopping"></i> ${addToCartText}
+      </button>
+    </div>
+  `;
+}
+
+/* ---------- Mobile Shop: Render Carousel Sections ---------- */
+function renderMobileShopSections() {
+  const shopMainCatalog = document.querySelector('.shop-main-catalog');
+  if (!shopMainCatalog) return;
+
+  // Remove existing mobile sections container if it exists
+  const existingContainer = document.getElementById('mobileShopSections');
+  if (existingContainer) existingContainer.remove();
+
+  const sectionsContainer = document.createElement('div');
+  sectionsContainer.id = 'mobileShopSections';
+  sectionsContainer.className = 'mobile-shop-sections';
+
+  let sectionsHTML = '';
+
+  MOBILE_SHOP_SECTIONS.forEach(section => {
+    const sectionProducts = section.filter(products);
+    if (sectionProducts.length === 0) return;
+
+    const sectionTitle = currentLang === 'am' && section.title_am ? section.title_am : section.title;
+    const viewAllText = currentLang === 'am' ? 'ሁሉንም ይመልከቱ' : 'View All';
+
+    sectionsHTML += `
+      <div class="mobile-section">
+        <div class="mobile-section-header">
+          <h2 class="mobile-section-title">${escapeHtml(sectionTitle)}</h2>
+          <button class="mobile-section-viewall" onclick="setShopCategory('${escapeHtml(section.viewAllCategory)}')">
+            ${viewAllText} <i class="fa-solid fa-chevron-right"></i>
+          </button>
+        </div>
+        <div class="mobile-product-carousel">
+          ${sectionProducts.map(mobileProductCardHTML).join('')}
+        </div>
+      </div>
+    `;
+  });
+
+  sectionsContainer.innerHTML = sectionsHTML;
+
+  // Insert after the category row, before the toolbar
+  const toolbar = shopMainCatalog.querySelector('.shop-toolbar');
+  if (toolbar) {
+    shopMainCatalog.insertBefore(sectionsContainer, toolbar);
+  } else {
+    shopMainCatalog.appendChild(sectionsContainer);
+  }
+}
+
+/* ---------- Mobile Shop: Toggle Between Carousel and Grid Mode ---------- */
+function isMobileShopCarouselMode() {
+  return window.innerWidth <= 768 &&
+         currentCategory === 'All' &&
+         !currentSearch &&
+         currentMaxPrice >= 10000 &&
+         currentMinRating === 0 &&
+         currentSort === 'default';
+}
+
+function updateMobileShopLayout() {
+  if (window.innerWidth > 768) return; // Desktop: do nothing
+
+  const grid = document.getElementById('shopGrid');
+  const toolbar = document.querySelector('.shop-toolbar');
+  const emptyState = document.getElementById('shopEmptyState');
+  const sectionsContainer = document.getElementById('mobileShopSections');
+
+  if (isMobileShopCarouselMode()) {
+    // Carousel mode: hide grid, show sections
+    if (grid) grid.classList.add('mobile-hidden');
+    if (toolbar) toolbar.classList.add('mobile-hidden');
+    if (emptyState) emptyState.classList.add('mobile-hidden');
+    renderMobileShopSections();
+  } else {
+    // Grid mode: show grid, hide sections
+    if (grid) grid.classList.remove('mobile-hidden');
+    if (toolbar) toolbar.classList.remove('mobile-hidden');
+    if (emptyState) emptyState.classList.remove('mobile-hidden');
+    if (sectionsContainer) sectionsContainer.remove();
+  }
+}
+
 /* ---------- Shop Page Render ---------- */
 function renderShopPage() {
   // Pick up saved category from cross-page navigation
@@ -825,6 +980,9 @@ function applyShopFilters() {
     empty.style.display = "none";
     grid.innerHTML = filtered.map(productCardHTML).join('');
   }
+  
+  // Call update layout to switch between carousel and grid modes on mobile
+  updateMobileShopLayout();
 }
 
 /* ---------- Sort Functionality (Mobile) ---------- */
