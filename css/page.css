@@ -1050,14 +1050,18 @@
   .mobile-shop-sections {
     display: flex;
     flex-direction: column;
-    gap: 6px;
-    padding-bottom: 20px;
+    gap: 16px;
+    padding-bottom: 24px;
+    width: 100%;
+    min-width: 0;
   }
 
   /* --- Section Header (Title + View All) --- */
   .mobile-section {
     padding: 0;
     margin: 0;
+    width: 100%;
+    min-width: 0;
   }
 
   .mobile-section-header {
