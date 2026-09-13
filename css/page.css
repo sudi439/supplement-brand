@@ -1391,6 +1391,35 @@
 }
 
 /* ============================================================
+   SHOP HEADER — REMOVE BORDER LINE + SCROLL HIDE/SHOW
+   ============================================================ */
+
+/* Remove the white line between header and search bar */
+.page-shop .site-header {
+  border-bottom: none !important;
+}
+
+/* Smooth slide transition for scroll-direction hide/show */
+.page-shop #header-placeholder {
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.page-shop #header-placeholder.header-hidden {
+  transform: translateY(-100%);
+}
+
+/* Smooth transitions for search bar and category row */
+.page-shop .search-container {
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+              opacity 0.3s ease;
+}
+
+.page-shop .cat-row {
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+              opacity 0.3s ease;
+}
+
+/* ============================================================
    MOBILE SHOP HEADER + SEARCH STICKY OVERRIDES
    ============================================================ */
 @media (max-width: 768px) {

@@ -1858,11 +1858,46 @@ document.addEventListener('DOMContentLoaded', () => {
     activePage = detectCurrentPage();
     renderPageContent(activePage);
 
-    // Sticky header scroll elevation
+    // Sticky header scroll elevation + direction-based hide/show
+    let lastScrollY = window.scrollY;
+    let headerHidden = false;
+
     window.addEventListener('scroll', () => {
       const header = document.getElementById('siteHeader');
       if (header) {
         header.classList.toggle('scrolled', window.scrollY > 20);
+      }
+
+      // Shop page: hide header+search on scroll down, show on scroll up
+      if (document.body.classList.contains('page-shop')) {
+        const placeholder = document.getElementById('header-placeholder');
+        const searchBar = document.querySelector('.page-shop .search-container');
+        const catRow = document.querySelector('.page-shop .cat-row');
+        const currentScrollY = window.scrollY;
+        const delta = currentScrollY - lastScrollY;
+
+        // Only react after scrolling past the hero area and with a minimum delta
+        if (Math.abs(delta) > 5) {
+          if (delta > 0 && currentScrollY > 100) {
+            // Scrolling DOWN — hide
+            if (!headerHidden) {
+              if (placeholder) placeholder.classList.add('header-hidden');
+              if (searchBar) { searchBar.style.transform = 'translateY(-100%)'; searchBar.style.opacity = '0'; searchBar.style.pointerEvents = 'none'; }
+              if (catRow) { catRow.style.transform = 'translateY(-60px)'; catRow.style.opacity = '0'; catRow.style.pointerEvents = 'none'; }
+              headerHidden = true;
+            }
+          } else if (delta < 0) {
+            // Scrolling UP — show
+            if (headerHidden) {
+              if (placeholder) placeholder.classList.remove('header-hidden');
+              if (searchBar) { searchBar.style.transform = ''; searchBar.style.opacity = ''; searchBar.style.pointerEvents = ''; }
+              if (catRow) { catRow.style.transform = ''; catRow.style.opacity = ''; catRow.style.pointerEvents = ''; }
+              headerHidden = false;
+            }
+          }
+        }
+
+        lastScrollY = currentScrollY;
       }
     });
   }, 50);
