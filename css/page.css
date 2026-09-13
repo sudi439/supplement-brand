@@ -1389,3 +1389,84 @@
     margin-bottom: 8px !important;
   }
 }
+
+/* ============================================================
+   MOBILE SHOP HEADER + SEARCH STICKY OVERRIDES
+   ============================================================ */
+@media (max-width: 768px) {
+  /* Allow sticky to work within the layout */
+  .page-shop .shop-main-catalog {
+    overflow: visible !important;
+  }
+
+  /* Dark Blue Header */
+  .page-shop .site-header {
+    background: var(--blue-deep) !important;
+    border-bottom: none !important;
+    box-shadow: none !important; /* Remove so it blends with search */
+  }
+
+  .page-shop .site-header.scrolled {
+    background: var(--blue-deep) !important;
+    box-shadow: none !important;
+  }
+
+  /* Header Icons & Text Contrast */
+  .page-shop .brand-title {
+    color: #ffffff !important;
+  }
+
+  .page-shop .brand-emblem {
+    border-color: #ffffff !important;
+  }
+
+  .page-shop .header-actions .icon-btn {
+    background: rgba(255, 255, 255, 0.1) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    color: #ffffff !important;
+  }
+
+  .page-shop .menu-trigger {
+    color: #ffffff !important;
+  }
+
+  /* Sticky Search Container */
+  .page-shop .search-container {
+    position: sticky !important;
+    top: 54px !important; /* Header height */
+    z-index: 490 !important;
+    background: var(--blue-deep) !important;
+    
+    /* Pull up to remove the 12px gap from .section padding */
+    margin: -12px -12px 12px -12px !important;
+    width: calc(100% + 24px) !important;
+    
+    padding: 10px 12px 16px 12px !important;
+    box-shadow: 0 8px 16px rgba(11, 34, 24, 0.15) !important;
+  }
+
+  /* Search Input Styling */
+  .page-shop .search-container input {
+    background: rgba(255, 255, 255, 0.1) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    color: #ffffff !important;
+  }
+
+  .page-shop .search-container input::placeholder {
+    color: rgba(255, 255, 255, 0.6) !important;
+  }
+
+  .page-shop .search-container input:focus {
+    border-color: #ffffff !important;
+    background: rgba(255, 255, 255, 0.15) !important;
+  }
+
+  /* Search Icon */
+  .page-shop .search-container i {
+    color: rgba(255, 255, 255, 0.7) !important;
+    left: 27px !important; /* 15px original + 12px left padding */
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    margin-top: -3px !important; /* slight visual adjustment */
+  }
+}
