@@ -1875,6 +1875,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const bottomNav = document.querySelector('.mobile-bottom-nav');
         
         const currentScrollY = window.scrollY;
+        const delta = currentScrollY - lastScrollY;
 
         // Top-of-page safety: always show everything if near top
         if (currentScrollY <= 20) {
@@ -1884,9 +1885,11 @@ document.addEventListener('DOMContentLoaded', () => {
             if (bottomNav) { bottomNav.style.transform = ''; }
             headerHidden = false;
           }
+          lastScrollY = currentScrollY; // keep in sync
         } 
-        else {
-          if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        // Only react after scrolling past a minimum delta to avoid jitter
+        else if (Math.abs(delta) > 10) {
+          if (delta > 0 && currentScrollY > 100) {
             // Scrolling DOWN — hide
             if (!headerHidden) {
               if (placeholder) placeholder.classList.add('header-hidden');
@@ -1894,7 +1897,7 @@ document.addEventListener('DOMContentLoaded', () => {
               if (bottomNav) { bottomNav.style.transform = 'translateY(100%)'; }
               headerHidden = true;
             }
-          } else if (currentScrollY < lastScrollY) {
+          } else if (delta < 0) {
             // Scrolling UP — show
             if (headerHidden) {
               if (placeholder) placeholder.classList.remove('header-hidden');
@@ -1903,10 +1906,10 @@ document.addEventListener('DOMContentLoaded', () => {
               headerHidden = false;
             }
           }
+          // Only update lastScrollY when we actually hit the threshold
+          // This allows small continuous mobile scroll events to accumulate
+          lastScrollY = currentScrollY;
         }
-
-        // Always update lastScrollY to represent the true previous actual scroll position
-        lastScrollY = currentScrollY;
       }
     });
   }, 50);
