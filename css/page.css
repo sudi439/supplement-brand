@@ -1394,16 +1394,28 @@
    MOBILE SHOP HEADER + SEARCH STICKY OVERRIDES
    ============================================================ */
 @media (max-width: 768px) {
-  /* Allow sticky to work within the layout */
+
+  /* ---- Ensure sticky works: remove overflow clipping from ALL ancestors ---- */
+  .page-shop,
+  .page-shop main,
+  .page-shop .page-content,
+  .page-shop .section,
+  .page-shop .wrap,
+  .page-shop .shop-layout,
   .page-shop .shop-main-catalog {
     overflow: visible !important;
   }
 
-  /* Dark Blue Header */
+  /* ---- Dark Blue Header ---- */
   .page-shop .site-header {
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 500 !important;
     background: var(--blue-deep) !important;
     border-bottom: none !important;
-    box-shadow: none !important; /* Remove so it blends with search */
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
   }
 
   .page-shop .site-header.scrolled {
@@ -1411,62 +1423,81 @@
     box-shadow: none !important;
   }
 
-  /* Header Icons & Text Contrast */
+  /* ---- Header text & icon contrast ---- */
   .page-shop .brand-title {
     color: #ffffff !important;
   }
 
+  .page-shop .brand-subtitle {
+    color: rgba(255, 255, 255, 0.65) !important;
+  }
+
   .page-shop .brand-emblem {
-    border-color: #ffffff !important;
+    border-color: rgba(255, 255, 255, 0.6) !important;
+    background: #ffffff !important;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.15) !important;
   }
 
   .page-shop .header-actions .icon-btn {
     background: rgba(255, 255, 255, 0.1) !important;
-    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    border: 1px solid rgba(255, 255, 255, 0.18) !important;
     color: #ffffff !important;
+  }
+
+  .page-shop .header-actions .icon-btn:active {
+    background: rgba(255, 255, 255, 0.2) !important;
   }
 
   .page-shop .menu-trigger {
     color: #ffffff !important;
   }
 
-  /* Sticky Search Container */
-  .page-shop .search-container {
-    position: sticky !important;
-    top: 54px !important; /* Header height */
-    z-index: 490 !important;
-    background: var(--blue-deep) !important;
-    
-    /* Pull up to remove the 12px gap from .section padding */
-    margin: -12px -12px 12px -12px !important;
-    width: calc(100% + 24px) !important;
-    
-    padding: 10px 12px 16px 12px !important;
-    box-shadow: 0 8px 16px rgba(11, 34, 24, 0.15) !important;
+  .page-shop .cart-badge {
+    border-color: var(--blue-deep) !important;
   }
 
-  /* Search Input Styling */
+  /* ---- Sticky Search Container ---- */
+  .page-shop .search-container {
+    position: sticky !important;
+    top: 54px !important;
+    z-index: 490 !important;
+    background: var(--blue-deep) !important;
+
+    /* Bleed to edges so it's full-width despite parent padding */
+    margin-left: -12px !important;
+    margin-right: -12px !important;
+    margin-top: -12px !important;
+    margin-bottom: 12px !important;
+    width: calc(100% + 24px) !important;
+
+    padding: 0 12px 14px 12px !important;
+    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.18) !important;
+  }
+
+  /* ---- Search Input ---- */
   .page-shop .search-container input {
-    background: rgba(255, 255, 255, 0.1) !important;
-    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    background: rgba(255, 255, 255, 0.12) !important;
+    border: 1px solid rgba(255, 255, 255, 0.22) !important;
     color: #ffffff !important;
+    box-shadow: none !important;
   }
 
   .page-shop .search-container input::placeholder {
-    color: rgba(255, 255, 255, 0.6) !important;
+    color: rgba(255, 255, 255, 0.55) !important;
   }
 
   .page-shop .search-container input:focus {
-    border-color: #ffffff !important;
-    background: rgba(255, 255, 255, 0.15) !important;
+    border-color: rgba(255, 255, 255, 0.6) !important;
+    background: rgba(255, 255, 255, 0.18) !important;
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1) !important;
   }
 
-  /* Search Icon */
+  /* ---- Search Icon ---- */
   .page-shop .search-container i {
-    color: rgba(255, 255, 255, 0.7) !important;
-    left: 27px !important; /* 15px original + 12px left padding */
+    color: rgba(255, 255, 255, 0.65) !important;
+    left: 27px !important;
     top: 50% !important;
     transform: translateY(-50%) !important;
-    margin-top: -3px !important; /* slight visual adjustment */
+    margin-top: -7px !important;
   }
 }
