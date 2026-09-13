@@ -1885,9 +1885,10 @@ document.addEventListener('DOMContentLoaded', () => {
             if (bottomNav) { bottomNav.style.transform = ''; }
             headerHidden = false;
           }
+          lastScrollY = currentScrollY; // keep in sync
         } 
-        // Only react after scrolling past the hero area and with a minimum delta
-        else if (Math.abs(delta) > 5) {
+        // Only react after scrolling past a minimum delta to avoid jitter
+        else if (Math.abs(delta) > 10) {
           if (delta > 0 && currentScrollY > 100) {
             // Scrolling DOWN — hide
             if (!headerHidden) {
@@ -1905,9 +1906,10 @@ document.addEventListener('DOMContentLoaded', () => {
               headerHidden = false;
             }
           }
+          // Only update lastScrollY when we actually hit the threshold
+          // This allows small continuous mobile scroll events to accumulate
+          lastScrollY = currentScrollY;
         }
-
-        lastScrollY = currentScrollY;
       }
     });
   }, 50);
