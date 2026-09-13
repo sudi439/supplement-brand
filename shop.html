@@ -68,23 +68,39 @@
                 <input type="text" id="shopSearchInput" placeholder="Search products or categories…" data-i18n-placeholder="search_placeholder" oninput="onSearchInput(this.value)">
               </div>
 
+              <!-- Promotional Banner Carousel (mobile only, JS-populated) -->
+              <div id="promoBannerCarousel" class="promo-carousel-wrap"></div>
+
               <!-- Category Pills Row -->
               <div class="cat-row" id="shopCategoryRow" style="margin-bottom:20px;"></div>
 
               <div class="shop-toolbar">
                 <span class="result-count" id="resultCount">Loading products…</span>
-                <button class="btn btn-outline btn-sm mobile-filter-btn" onclick="toggleMobileFilters(true)">
-                  <i class="fa-solid fa-sliders"></i> Filters
-                </button>
+                <div class="shop-toolbar-actions">
+                  <button class="btn btn-outline btn-sm mobile-filter-btn" onclick="toggleMobileFilters(true)">
+                    <i class="fa-solid fa-sliders"></i> Filters
+                  </button>
+                  <div class="mobile-sort-wrap" id="mobileSortWrap">
+                    <button class="btn btn-outline btn-sm mobile-sort-btn" onclick="toggleMobileSort()">
+                      <i class="fa-solid fa-arrow-down-short-wide"></i> Sort
+                    </button>
+                    <div class="mobile-sort-dropdown" id="mobileSortDropdown">
+                      <button class="sort-option active" data-sort="default" onclick="setSort('default')">Default</button>
+                      <button class="sort-option" data-sort="price-asc" onclick="setSort('price-asc')">Price: Low → High</button>
+                      <button class="sort-option" data-sort="price-desc" onclick="setSort('price-desc')">Price: High → Low</button>
+                      <button class="sort-option" data-sort="name-asc" onclick="setSort('name-asc')">Name: A → Z</button>
+                    </div>
+                  </div>
+                </div>
               </div>
 
               <div class="product-grid" id="shopGrid"></div>
 
-              <div id="shopEmptyState" style="display:none;text-align:center;padding:70px 20px;">
-                <i class="fa-solid fa-magnifying-glass" style="font-size:3rem;color:var(--accent-primary);margin-bottom:14px;"></i>
-                <h3>No matching products found</h3>
-                <p style="color:var(--ink-muted);margin-top:8px;">Try modifying your search or reset the filters.</p>
-                <button class="btn btn-outline" style="margin-top:20px;" onclick="resetFilters()">Reset Filters</button>
+              <div id="shopEmptyState" class="shop-empty-state" style="display:none;">
+                <i class="fa-solid fa-capsules"></i>
+                <h3>No supplements found</h3>
+                <p>Try another search or clear your filters.</p>
+                <button class="btn btn-outline" onclick="resetFilters()"><i class="fa-solid fa-rotate-left"></i> Clear Filters</button>
               </div>
             </div>
           </div>

@@ -23,7 +23,7 @@ function activeClass(page) {
 /* ---------- Header ---------- */
 const HEADER_HTML = `<header class="site-header" id="siteHeader">
   <div class="header-inner wrap">
-    <a href="homepage.html" class="brand-logo" aria-label="Adwa Supplements home">
+    <a href="index.html" class="brand-logo" aria-label="Adwa Supplements home">
       <div class="brand-emblem">
         <img src="images/adwa.jpg" alt="Adwa Logo" onerror="this.onerror=null; this.parentElement.innerHTML='<svg viewBox=&quot;0 0 48 48&quot; fill=&quot;none&quot;><path d=&quot;M24 2 L30 20 L46 20 L33 30 L38 46 L24 36 L10 46 L15 30 L2 20 L18 20 Z&quot; fill=&quot;#4F46E5&quot; opacity=&quot;.9&quot;/></svg>';">
       </div>
@@ -34,7 +34,7 @@ const HEADER_HTML = `<header class="site-header" id="siteHeader">
     </a>
 
     <nav class="main-nav" id="mainNav">
-      <a href="homepage.html" class="nav-link ${activeClass('home')}" data-page="home" data-i18n="nav_home">Home</a>
+      <a href="index.html" class="nav-link ${activeClass('home')}" data-page="home" data-i18n="nav_home">Home</a>
       <a href="shop.html" class="nav-link ${activeClass('shop')}" data-page="shop" data-i18n="nav_shop">Shop</a>
       <a href="about.html" class="nav-link ${activeClass('about')}" data-page="about" data-i18n="nav_about">About</a>
       <a href="contact.html" class="nav-link ${activeClass('contact')}" data-page="contact" data-i18n="nav_contact">Contact</a>
@@ -72,7 +72,7 @@ const HEADER_HTML = `<header class="site-header" id="siteHeader">
       </button>
     </div>
     <div class="drawer-links">
-      <a href="homepage.html" class="${activeClass('home')}"><span data-i18n="nav_home">Home</span> <i class="fa-solid fa-chevron-right" style="font-size:0.7rem;color:var(--ink-muted);"></i></a>
+      <a href="index.html" class="${activeClass('home')}"><span data-i18n="nav_home">Home</span> <i class="fa-solid fa-chevron-right" style="font-size:0.7rem;color:var(--ink-muted);"></i></a>
       <a href="shop.html" class="${activeClass('shop')}"><span data-i18n="nav_shop">Shop</span> <i class="fa-solid fa-chevron-right" style="font-size:0.7rem;color:var(--ink-muted);"></i></a>
       <a href="about.html" class="${activeClass('about')}"><span data-i18n="nav_about">About</span> <i class="fa-solid fa-chevron-right" style="font-size:0.7rem;color:var(--ink-muted);"></i></a>
       <a href="contact.html" class="${activeClass('contact')}"><span data-i18n="nav_contact">Contact</span> <i class="fa-solid fa-chevron-right" style="font-size:0.7rem;color:var(--ink-muted);"></i></a>
@@ -141,7 +141,7 @@ const TOAST_HTML = `<div class="toast" id="toast">
 
 /* ---------- Mobile Bottom Nav ---------- */
 const MOBILE_NAV_HTML = `<nav class="mobile-bottom-nav">
-  <a href="homepage.html" class="mb-nav-item ${activeClass('home')}" data-nav="home">
+  <a href="index.html" class="mb-nav-item ${activeClass('home')}" data-nav="home">
     <i class="fa-solid fa-house"></i>
     <span data-i18n="nav_home">Home</span>
   </a>

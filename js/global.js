@@ -437,6 +437,7 @@ let currentMinRating = 0;
 let currentProductId = null;
 let pendingOrderData = null;
 let paymentTimerInterval = null;
+let currentSort = 'default';
 
 /* ---------- Persistence ---------- */
 function initData() {
@@ -532,7 +533,7 @@ let activePage = 'home';
 
 /* Maps page IDs to their HTML files */
 const PAGE_FILES = {
-  home: 'homepage.html',
+  home: 'index.html',
   shop: 'shop.html',
   product: 'product.html',
   cart: 'cart.html',
@@ -743,6 +744,9 @@ function renderShopPage() {
   document.getElementById('sideRatingList').innerHTML = ratingHTML;
 
   applyShopFilters();
+
+  // Initialize promo banner on mobile
+  initPromoBanner();
 }
 
 function setShopCategory(c) {
@@ -772,17 +776,22 @@ function resetFilters() {
   currentSearch = "";
   currentMaxPrice = 10000;
   currentMinRating = 0;
+  currentSort = 'default';
   const sInput = document.getElementById('shopSearchInput');
   if (sInput) sInput.value = "";
   const pSlider = document.getElementById('priceRangeSlider');
   if (pSlider) pSlider.value = 10000;
   const pDisplay = document.getElementById('priceRangeDisplay');
   if (pDisplay) pDisplay.textContent = '10,000+ ETB';
+  // Reset sort UI
+  document.querySelectorAll('.sort-option').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.sort === 'default');
+  });
   renderShopPage();
 }
 
 function applyShopFilters() {
-  const filtered = products.filter(p => {
+  let filtered = products.filter(p => {
     const matchCat = currentCategory === 'All' || p.category === currentCategory;
     const matchSearch = !currentSearch || 
       p.name.toLowerCase().includes(currentSearch) || 
@@ -793,6 +802,15 @@ function applyShopFilters() {
     const matchRating = p.rating >= currentMinRating;
     return matchCat && matchSearch && matchPrice && matchRating;
   });
+
+  // Apply sort
+  if (currentSort === 'price-asc') {
+    filtered.sort((a, b) => a.price - b.price);
+  } else if (currentSort === 'price-desc') {
+    filtered.sort((a, b) => b.price - a.price);
+  } else if (currentSort === 'name-asc') {
+    filtered.sort((a, b) => a.name.localeCompare(b.name));
+  }
 
   const countEl = document.getElementById('resultCount');
   if (countEl) countEl.textContent = `${filtered.length} supplement${filtered.length !== 1 ? 's' : ''} found`;
@@ -807,6 +825,205 @@ function applyShopFilters() {
     empty.style.display = "none";
     grid.innerHTML = filtered.map(productCardHTML).join('');
   }
+}
+
+/* ---------- Sort Functionality (Mobile) ---------- */
+function toggleMobileSort() {
+  const dropdown = document.getElementById('mobileSortDropdown');
+  if (dropdown) {
+    const isOpen = dropdown.classList.toggle('open');
+    if (isOpen) {
+      // Close on outside click
+      setTimeout(() => {
+        document.addEventListener('click', closeSortOnOutside);
+      }, 10);
+    }
+  }
+}
+
+function closeSortOnOutside(e) {
+  const wrap = document.getElementById('mobileSortWrap');
+  if (wrap && !wrap.contains(e.target)) {
+    const dropdown = document.getElementById('mobileSortDropdown');
+    if (dropdown) dropdown.classList.remove('open');
+    document.removeEventListener('click', closeSortOnOutside);
+  }
+}
+
+function setSort(option) {
+  currentSort = option;
+  // Update active state on sort buttons
+  document.querySelectorAll('.sort-option').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.sort === option);
+  });
+  // Close dropdown
+  const dropdown = document.getElementById('mobileSortDropdown');
+  if (dropdown) dropdown.classList.remove('open');
+  document.removeEventListener('click', closeSortOnOutside);
+  applyShopFilters();
+}
+
+/* ---------- Promotional Banner Carousel (Mobile Only — Demo Content) ---------- */
+const PROMO_BANNERS = [
+  {
+    badge: 'Limited Offer',
+    headline: 'UP TO 20% OFF',
+    subtext: 'Save on selected protein supplements',
+    cta: 'Shop Protein',
+    category: 'Whey Isolate',
+    bg: 'linear-gradient(135deg, #1E3A8A 0%, #312E81 100%)'
+  },
+  {
+    badge: 'Creatine Special',
+    headline: '15% OFF CREATINE',
+    subtext: 'Limited-time offer on selected creatine',
+    cta: 'Shop Creatine',
+    category: 'Creatine',
+    bg: 'linear-gradient(135deg, #065F46 0%, #1E3A5F 100%)'
+  },
+  {
+    badge: 'Bundle Deal',
+    headline: 'BUNDLE & SAVE',
+    subtext: 'Get more value with protein + creatine bundles',
+    cta: 'View Bundles',
+    category: 'All',
+    bg: 'linear-gradient(135deg, #4F46E5 0%, #6D28D9 100%)'
+  },
+  {
+    badge: 'Just Landed',
+    headline: 'NEW ARRIVALS',
+    subtext: 'Discover the latest supplements in our catalog',
+    cta: 'Shop New',
+    category: 'All',
+    bg: 'linear-gradient(135deg, #7C2D12 0%, #991B1B 100%)'
+  },
+  {
+    badge: 'This Weekend',
+    headline: 'WEEKEND SPECIAL',
+    subtext: 'Extra savings on selected wellness products',
+    cta: 'Shop Now',
+    category: 'Daily Wellness',
+    bg: 'linear-gradient(135deg, #1E3A8A 0%, #4338CA 100%)'
+  }
+];
+
+let _promoInterval = null;
+let _promoIndex = 0;
+let _promoResumeTimer = null;
+
+function initPromoBanner() {
+  const wrap = document.getElementById('promoBannerCarousel');
+  if (!wrap) return;
+
+  // Only render on mobile-width screens
+  if (window.innerWidth > 768) {
+    wrap.innerHTML = '';
+    return;
+  }
+
+  // Build slides
+  const slidesHTML = PROMO_BANNERS.map((b, i) => `
+    <div class="promo-slide" style="background:${b.bg};" data-index="${i}">
+      <span class="promo-badge">${escapeHtml(b.badge)}</span>
+      <div class="promo-headline">${escapeHtml(b.headline)}</div>
+      <div class="promo-subtext">${escapeHtml(b.subtext)}</div>
+      <button class="promo-cta" onclick="goToShopCategory('${escapeHtml(b.category)}')">
+        ${escapeHtml(b.cta)} <i class="fa-solid fa-arrow-right" style="font-size:0.65rem;"></i>
+      </button>
+    </div>
+  `).join('');
+
+  const dotsHTML = PROMO_BANNERS.map((_, i) => `
+    <button class="promo-dot ${i === 0 ? 'active' : ''}" data-dot="${i}" onclick="goToPromoSlide(${i})" aria-label="Go to promotion ${i + 1}"></button>
+  `).join('');
+
+  wrap.innerHTML = `
+    <div class="promo-carousel-track" id="promoTrack">${slidesHTML}</div>
+    <div class="promo-dots" id="promoDots">${dotsHTML}</div>
+  `;
+
+  _promoIndex = 0;
+  startPromoAutoplay();
+  initPromoSwipe();
+}
+
+function goToPromoSlide(index) {
+  const track = document.getElementById('promoTrack');
+  const dots = document.querySelectorAll('.promo-dot');
+  if (!track) return;
+
+  _promoIndex = index;
+  track.style.transform = `translateX(-${index * 100}%)`;
+  dots.forEach((d, i) => d.classList.toggle('active', i === index));
+}
+
+function advancePromoSlide() {
+  _promoIndex = (_promoIndex + 1) % PROMO_BANNERS.length;
+  goToPromoSlide(_promoIndex);
+}
+
+function startPromoAutoplay() {
+  stopPromoAutoplay();
+  _promoInterval = setInterval(advancePromoSlide, 5000);
+}
+
+function stopPromoAutoplay() {
+  if (_promoInterval) {
+    clearInterval(_promoInterval);
+    _promoInterval = null;
+  }
+}
+
+function pausePromoAutoplay() {
+  stopPromoAutoplay();
+  if (_promoResumeTimer) clearTimeout(_promoResumeTimer);
+  _promoResumeTimer = setTimeout(startPromoAutoplay, 8000);
+}
+
+function initPromoSwipe() {
+  const track = document.getElementById('promoTrack');
+  if (!track) return;
+
+  let startX = 0;
+  let currentX = 0;
+  let isDragging = false;
+
+  track.addEventListener('touchstart', (e) => {
+    startX = e.touches[0].clientX;
+    currentX = startX;
+    isDragging = true;
+    track.classList.add('swiping');
+    pausePromoAutoplay();
+  }, { passive: true });
+
+  track.addEventListener('touchmove', (e) => {
+    if (!isDragging) return;
+    currentX = e.touches[0].clientX;
+    const diff = currentX - startX;
+    const offset = -(_promoIndex * 100);
+    const pxPercent = (diff / track.parentElement.offsetWidth) * 100;
+    track.style.transform = `translateX(${offset + pxPercent}%)`;
+  }, { passive: true });
+
+  track.addEventListener('touchend', () => {
+    if (!isDragging) return;
+    isDragging = false;
+    track.classList.remove('swiping');
+    const diff = currentX - startX;
+    const threshold = 30;
+
+    if (diff < -threshold && _promoIndex < PROMO_BANNERS.length - 1) {
+      _promoIndex++;
+    } else if (diff > threshold && _promoIndex > 0) {
+      _promoIndex--;
+    } else if (diff < -threshold && _promoIndex === PROMO_BANNERS.length - 1) {
+      _promoIndex = 0; // Loop
+    } else if (diff > threshold && _promoIndex === 0) {
+      _promoIndex = PROMO_BANNERS.length - 1; // Loop
+    }
+
+    goToPromoSlide(_promoIndex);
+  }, { passive: true });
 }
 
 /* ---------- Product Detail View (High-Res 1:1 Showcase & Mobile Buy Bar) ---------- */

@@ -776,4 +776,262 @@
   .quick-add-btn:active {
     transform: scale(0.9) !important;
   }
+
+  /* ============================================================
+     8. PROMOTIONAL BANNER CAROUSEL (Mobile Only)
+     ============================================================ */
+  .promo-carousel-wrap {
+    position: relative !important;
+    margin-bottom: 14px !important;
+    overflow: hidden !important;
+    border-radius: 12px !important;
+    width: 100% !important;
+    touch-action: pan-y !important;
+  }
+
+  .promo-carousel-track {
+    display: flex !important;
+    transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+    will-change: transform !important;
+  }
+
+  .promo-carousel-track.swiping {
+    transition: none !important;
+  }
+
+  .promo-slide {
+    flex: 0 0 100% !important;
+    min-width: 100% !important;
+    padding: 22px 20px 18px !important;
+    box-sizing: border-box !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    min-height: 130px !important;
+    position: relative !important;
+    overflow: hidden !important;
+  }
+
+  .promo-slide::after {
+    content: '' !important;
+    position: absolute !important;
+    top: -20px !important;
+    right: -20px !important;
+    width: 100px !important;
+    height: 100px !important;
+    border-radius: 50% !important;
+    background: rgba(255, 255, 255, 0.06) !important;
+    pointer-events: none !important;
+  }
+
+  .promo-badge {
+    display: inline-block !important;
+    font-size: 0.58rem !important;
+    font-weight: 800 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.1em !important;
+    color: rgba(255, 255, 255, 0.9) !important;
+    background: rgba(255, 255, 255, 0.15) !important;
+    padding: 3px 8px !important;
+    border-radius: 4px !important;
+    margin-bottom: 6px !important;
+    width: fit-content !important;
+  }
+
+  .promo-headline {
+    font-family: var(--font-body) !important;
+    font-size: 1.4rem !important;
+    font-weight: 800 !important;
+    color: #ffffff !important;
+    line-height: 1.15 !important;
+    margin-bottom: 4px !important;
+    letter-spacing: -0.01em !important;
+  }
+
+  .promo-subtext {
+    font-size: 0.8rem !important;
+    color: rgba(255, 255, 255, 0.8) !important;
+    line-height: 1.35 !important;
+    margin-bottom: 10px !important;
+    max-width: 85% !important;
+  }
+
+  .promo-cta {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    font-size: 0.72rem !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.06em !important;
+    color: #ffffff !important;
+    background: rgba(255, 255, 255, 0.2) !important;
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+    padding: 7px 14px !important;
+    border-radius: 6px !important;
+    cursor: pointer !important;
+    width: fit-content !important;
+    transition: background 0.2s ease !important;
+    text-decoration: none !important;
+  }
+
+  .promo-cta:active {
+    background: rgba(255, 255, 255, 0.35) !important;
+  }
+
+  .promo-dots {
+    display: flex !important;
+    justify-content: center !important;
+    gap: 6px !important;
+    padding: 10px 0 2px !important;
+  }
+
+  .promo-dot {
+    width: 6px !important;
+    height: 6px !important;
+    border-radius: 50% !important;
+    background: rgba(0, 0, 0, 0.15) !important;
+    border: none !important;
+    padding: 0 !important;
+    cursor: pointer !important;
+    transition: background 0.25s ease, transform 0.25s ease !important;
+  }
+
+  .promo-dot.active {
+    background: var(--blue-deep) !important;
+    transform: scale(1.3) !important;
+  }
+
+  /* ============================================================
+     9. SORT DROPDOWN (Mobile Only)
+     ============================================================ */
+  .shop-toolbar-actions {
+    display: flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+  }
+
+  .mobile-sort-wrap {
+    position: relative !important;
+    display: inline-block !important;
+  }
+
+  .mobile-sort-btn {
+    padding: 6px 14px !important;
+    font-size: 0.76rem !important;
+    font-weight: 700 !important;
+    border-radius: 18px !important;
+    border: 1px solid rgba(0, 0, 0, 0.12) !important;
+    background: #ffffff !important;
+    color: var(--blue-deep) !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04) !important;
+    cursor: pointer !important;
+  }
+
+  .mobile-sort-dropdown {
+    display: none;
+    position: absolute !important;
+    top: calc(100% + 6px) !important;
+    right: 0 !important;
+    background: #ffffff !important;
+    border: 1px solid rgba(0, 0, 0, 0.1) !important;
+    border-radius: 10px !important;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12) !important;
+    z-index: 100 !important;
+    min-width: 180px !important;
+    overflow: hidden !important;
+  }
+
+  .mobile-sort-dropdown.open {
+    display: block;
+  }
+
+  .sort-option {
+    display: block !important;
+    width: 100% !important;
+    text-align: left !important;
+    padding: 11px 16px !important;
+    font-size: 0.82rem !important;
+    font-weight: 500 !important;
+    color: #334155 !important;
+    background: none !important;
+    border: none !important;
+    cursor: pointer !important;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05) !important;
+    transition: background 0.15s ease !important;
+  }
+
+  .sort-option:last-child {
+    border-bottom: none !important;
+  }
+
+  .sort-option.active {
+    color: var(--blue-deep) !important;
+    font-weight: 700 !important;
+    background: rgba(30, 58, 138, 0.05) !important;
+  }
+
+  .sort-option:active {
+    background: rgba(30, 58, 138, 0.08) !important;
+  }
+
+  /* ============================================================
+     10. IMPROVED EMPTY STATE (Mobile)
+     ============================================================ */
+  .shop-empty-state {
+    text-align: center !important;
+    padding: 50px 20px !important;
+  }
+
+  .shop-empty-state i {
+    font-size: 2.5rem !important;
+    color: var(--ink-light) !important;
+    margin-bottom: 14px !important;
+    display: block !important;
+  }
+
+  .shop-empty-state h3 {
+    font-size: 1.05rem !important;
+    font-weight: 700 !important;
+    color: var(--ink) !important;
+    margin-bottom: 6px !important;
+  }
+
+  .shop-empty-state p {
+    font-size: 0.85rem !important;
+    color: var(--ink-muted) !important;
+    margin-bottom: 18px !important;
+  }
+
+  .shop-empty-state .btn {
+    font-size: 0.8rem !important;
+    padding: 10px 20px !important;
+  }
+
+  /* ============================================================
+     11. REFINED ADD-TO-CART BUTTON (Larger touch target)
+     ============================================================ */
+  .quick-add-btn {
+    width: 34px !important;
+    height: 34px !important;
+    min-width: 34px !important;
+  }
+}
+
+/* Hide promo carousel on desktop */
+@media (min-width: 769px) {
+  .promo-carousel-wrap {
+    display: none !important;
+  }
+  .mobile-sort-wrap {
+    display: none !important;
+  }
+  .shop-toolbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
 }
