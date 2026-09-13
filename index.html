@@ -1,14 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="refresh" content="0; url=homepage.html">
-    <title>Redirecting to Homepage</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home — Adwa Supplements</title>
+  <meta name="description" content="Welcome to Adwa Supplements.">
+  <meta name="theme-color" content="#0B2218">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Noto+Sans+Ethiopic:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/page.css">
 </head>
 <body>
-    <script>
-        window.location.href = "homepage.html";
-    </script>
-    <p>If you are not redirected automatically, follow this <a href="homepage.html">link to the homepage</a>.</p>
+
+  <div id="header-placeholder"></div>
+
+  <main>
+    <section class="page-content active" id="view-home">
+      <!-- HERO SECTION -->
+      <div style="background:var(--blue-deep, #0B2218);color:#fff;padding:100px 20px;text-align:center;border-bottom:1px solid var(--line-accent, rgba(255,255,255,0.1));">
+        <div class="wrap">
+            <h1 style="font-size:3.5rem;margin-bottom:16px;font-family:'Cinzel', serif;">Strength like Adwa. Every day.</h1>
+            <p style="font-size:1.2rem;opacity:0.9;max-width:600px;margin:0 auto 30px;line-height:1.6;">Premium supplements, whey protein isolates, creatine, pre-workouts, and Ethiopian botanical formulas.</p>
+            <a href="shop.html" class="btn" style="background:#fff;color:var(--blue-deep, #0B2218);padding:14px 30px;border-radius:4px;font-weight:bold;text-decoration:none;display:inline-block;font-size:1.1rem;text-transform:uppercase;letter-spacing:1px;">Shop Now</a>
+        </div>
+      </div>
+
+      <div class="wrap" style="padding: 80px 20px; text-align: center;">
+         <h2 style="font-size:2.4rem;color:var(--ink-dark);margin-bottom:20px;font-family:'Cinzel', serif;">Our Featured Collection</h2>
+         <p style="color:var(--ink-muted);font-size:1.1rem;max-width:500px;margin:0 auto 40px;">Explore our best-selling performance nutrition products.</p>
+         
+         <a href="shop.html" class="btn btn-outline" style="border: 2px solid var(--blue-deep, #0B2218); color: var(--blue-deep, #0B2218); padding: 12px 28px; border-radius: 4px; text-decoration: none;font-weight:600;">View Full Catalog</a>
+      </div>
+    </section>
+  </main>
+
+  <div id="footer-placeholder"></div>
+  <div id="mobile-nav-placeholder"></div>
+  
+  <script src="js/global.js"></script>
+  <script src="js/components.js"></script>
 </body>
 </html>
