@@ -1408,13 +1408,8 @@
   transform: translateY(-100%);
 }
 
-/* Smooth transitions for search bar and category row */
+/* Smooth transitions for search bar */
 .page-shop .search-container {
-  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1),
-              opacity 0.3s ease;
-}
-
-.page-shop .cat-row {
   transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1),
               opacity 0.3s ease;
 }

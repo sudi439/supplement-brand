@@ -1872,18 +1872,28 @@ document.addEventListener('DOMContentLoaded', () => {
       if (document.body.classList.contains('page-shop')) {
         const placeholder = document.getElementById('header-placeholder');
         const searchBar = document.querySelector('.page-shop .search-container');
-        const catRow = document.querySelector('.page-shop .cat-row');
+        const bottomNav = document.querySelector('.mobile-bottom-nav');
+        
         const currentScrollY = window.scrollY;
         const delta = currentScrollY - lastScrollY;
 
+        // Top-of-page safety: always show everything if near top
+        if (currentScrollY <= 20) {
+          if (headerHidden) {
+            if (placeholder) placeholder.classList.remove('header-hidden');
+            if (searchBar) { searchBar.style.transform = ''; searchBar.style.opacity = ''; searchBar.style.pointerEvents = ''; }
+            if (bottomNav) { bottomNav.style.transform = ''; }
+            headerHidden = false;
+          }
+        } 
         // Only react after scrolling past the hero area and with a minimum delta
-        if (Math.abs(delta) > 5) {
+        else if (Math.abs(delta) > 5) {
           if (delta > 0 && currentScrollY > 100) {
             // Scrolling DOWN — hide
             if (!headerHidden) {
               if (placeholder) placeholder.classList.add('header-hidden');
               if (searchBar) { searchBar.style.transform = 'translateY(-100%)'; searchBar.style.opacity = '0'; searchBar.style.pointerEvents = 'none'; }
-              if (catRow) { catRow.style.transform = 'translateY(-60px)'; catRow.style.opacity = '0'; catRow.style.pointerEvents = 'none'; }
+              if (bottomNav) { bottomNav.style.transform = 'translateY(100%)'; }
               headerHidden = true;
             }
           } else if (delta < 0) {
@@ -1891,7 +1901,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (headerHidden) {
               if (placeholder) placeholder.classList.remove('header-hidden');
               if (searchBar) { searchBar.style.transform = ''; searchBar.style.opacity = ''; searchBar.style.pointerEvents = ''; }
-              if (catRow) { catRow.style.transform = ''; catRow.style.opacity = ''; catRow.style.pointerEvents = ''; }
+              if (bottomNav) { bottomNav.style.transform = ''; }
               headerHidden = false;
             }
           }
