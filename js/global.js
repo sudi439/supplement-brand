@@ -872,6 +872,15 @@ function renderShopPage() {
     sessionStorage.removeItem('adwa_shop_category');
   }
 
+  // Parse search query from URL if present
+  const params = new URLSearchParams(window.location.search);
+  const q = params.get('q');
+  if (q && currentSearch === "") {
+    currentSearch = q.toLowerCase().trim();
+    const sInput = document.getElementById('shopSearchInput');
+    if (sInput) sInput.value = q;
+  }
+
   // Category pills
   const pillsHTML = ['All', ...CATEGORIES].map(c => `
     <button class="pill ${currentCategory === c ? 'active' : ''}" onclick="setShopCategory('${c}')">
