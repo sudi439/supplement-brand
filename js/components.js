@@ -23,42 +23,58 @@ function activeClass(page) {
 /* ---------- Header ---------- */
 const HEADER_HTML = `<header class="site-header" id="siteHeader">
   <div class="header-inner wrap">
-    <a href="index.html" class="brand-logo" aria-label="Adwa Supplements home">
-      <div class="brand-emblem">
-        <img src="images/adwa.jpg" alt="Adwa Logo" onerror="this.onerror=null; this.parentElement.innerHTML='<svg viewBox=&quot;0 0 48 48&quot; fill=&quot;none&quot;><path d=&quot;M24 2 L30 20 L46 20 L33 30 L38 46 L24 36 L10 46 L15 30 L2 20 L18 20 Z&quot; fill=&quot;#4F46E5&quot; opacity=&quot;.9&quot;/></svg>';">
-      </div>
-      <div class="brand-text">
-        <span class="brand-title">ADWA</span>
-        <span class="brand-subtitle">Supplements & Nutrition</span>
-      </div>
-    </a>
-
-    <nav class="main-nav" id="mainNav">
-      <a href="index.html" class="nav-link ${activeClass('home')}" data-page="home" data-i18n="nav_home">Home</a>
-      <a href="shop.html" class="nav-link ${activeClass('shop')}" data-page="shop" data-i18n="nav_shop">Shop</a>
-      <a href="about.html" class="nav-link ${activeClass('about')}" data-page="about" data-i18n="nav_about">About</a>
-      <a href="contact.html" class="nav-link ${activeClass('contact')}" data-page="contact" data-i18n="nav_contact">Contact</a>
-    </nav>
-
-    <div class="header-actions">
-      <div class="lang-toggle">
-        <button class="lang-btn" data-lang="en" onclick="setLanguage('en')">EN</button>
-        <button class="lang-btn" data-lang="am" onclick="setLanguage('am')">አማ</button>
-      </div>
-      <a href="shop.html" class="icon-btn" aria-label="Search products">
-        <i class="fa-solid fa-magnifying-glass"></i>
-      </a>
-      <a href="javascript:void(0)" onclick="goToProfile()" class="icon-btn" aria-label="User Profile">
-        <i class="fa-solid fa-user"></i>
-      </a>
-      <a href="cart.html" class="icon-btn" aria-label="View cart">
-        <i class="fa-solid fa-bag-shopping"></i>
-        <span class="cart-badge" id="cartBadge">0</span>
-      </a>
+    
+    <div class="header-hamburger">
       <button class="icon-btn menu-trigger" onclick="toggleDrawer(true)" aria-label="Open menu">
         <i class="fa-solid fa-bars"></i>
       </button>
     </div>
+
+    <div class="header-logo">
+      <a href="index.html" class="brand-logo" aria-label="Adwa Supplements home">
+        <div class="brand-emblem">
+          <img src="images/adwa.jpg" alt="Adwa Logo" onerror="this.onerror=null; this.parentElement.innerHTML='<svg viewBox=&quot;0 0 48 48&quot; fill=&quot;none&quot;><path d=&quot;M24 2 L30 20 L46 20 L33 30 L38 46 L24 36 L10 46 L15 30 L2 20 L18 20 Z&quot; fill=&quot;#4F46E5&quot; opacity=&quot;.9&quot;/></svg>';">
+        </div>
+        <div class="brand-text">
+          <span class="brand-title">ADWA</span>
+          <span class="brand-subtitle">Supplements</span>
+        </div>
+      </a>
+    </div>
+
+    <div class="header-search">
+      <form class="header-search-form" action="shop.html" method="GET">
+        <div class="search-input-wrapper">
+          <input type="text" name="q" class="header-search-input" placeholder="Search for Supplements..." aria-label="Search">
+          <button type="submit" class="header-search-btn" aria-label="Submit Search">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <div class="header-actions-wrapper">
+      <nav class="main-nav" id="mainNav">
+        <a href="index.html" class="nav-link ${activeClass('home')}" data-page="home" data-i18n="nav_home">Home</a>
+        <a href="shop.html" class="nav-link ${activeClass('shop')}" data-page="shop" data-i18n="nav_shop">Shop</a>
+        <a href="about.html" class="nav-link ${activeClass('about')}" data-page="about" data-i18n="nav_about">About</a>
+        <a href="contact.html" class="nav-link ${activeClass('contact')}" data-page="contact" data-i18n="nav_contact">Contact</a>
+      </nav>
+      <div class="header-actions">
+        <div class="lang-toggle header-lang-toggle">
+          <button class="lang-btn" data-lang="en" onclick="setLanguage('en')">EN</button>
+          <button class="lang-btn" data-lang="am" onclick="setLanguage('am')">አማ</button>
+        </div>
+        <a href="javascript:void(0)" onclick="goToProfile()" class="icon-btn profile-btn" aria-label="User Profile">
+          <i class="fa-regular fa-user"></i>
+        </a>
+        <a href="cart.html" class="icon-btn cart-btn" aria-label="View cart">
+          <i class="fa-solid fa-cart-shopping"></i>
+          <span class="cart-badge" id="cartBadge">0</span>
+        </a>
+      </div>
+    </div>
+
   </div>
 </header>
 

@@ -318,11 +318,41 @@ body.lang-am .btn {
   background: rgba(255, 255, 255, 0.96);
 }
 
+/* Mobile-First Header Layout */
 .header-inner {
-  height: var(--header-h);
+  display: grid;
+  grid-template-columns: 42px 1fr auto;
+  grid-template-areas: 
+    "hamburger logo actions"
+    "search search search";
+  gap: 12px 16px;
+  padding: 12px 0 16px 0;
+  align-items: center;
+}
+
+.header-hamburger {
+  grid-area: hamburger;
+}
+
+.header-logo {
+  grid-area: logo;
+  display: flex;
+  justify-content: center;
+}
+
+.header-search {
+  grid-area: search;
+}
+
+.header-actions-wrapper {
+  grid-area: actions;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  gap: 12px;
+}
+
+.header-lang-toggle {
+  display: none;
 }
 
 /* Brand Logo */
@@ -530,6 +560,81 @@ body.lang-am .nav-link {
   .menu-trigger {
     display: none;
   }
+  
+  .header-inner {
+    grid-template-columns: auto 1fr auto;
+    grid-template-areas: "logo search actions";
+    gap: 32px;
+    padding: 0;
+    height: var(--header-h);
+  }
+
+  .header-logo {
+    justify-content: flex-start;
+  }
+  
+  .header-hamburger {
+    display: none;
+  }
+
+  .header-lang-toggle {
+    display: inline-flex;
+  }
+}
+
+/* Header Search Form */
+.header-search-form {
+  width: 100%;
+}
+
+.search-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.header-search-input {
+  width: 100%;
+  height: 44px;
+  padding: 0 44px 0 16px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--line-accent);
+  background: rgba(255, 255, 255, 0.8);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--blue-darker);
+  box-shadow: inset 0 2px 4px rgba(15, 23, 42, 0.02);
+  transition: all 0.2s ease;
+}
+
+.header-search-input:focus {
+  outline: none;
+  border-color: var(--accent-primary);
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+}
+
+.header-search-input::placeholder {
+  color: var(--ink-light);
+}
+
+.header-search-btn {
+  position: absolute;
+  right: 4px;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-sm);
+  background: var(--accent-primary);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease;
+}
+
+.header-search-btn:hover {
+  background: var(--blue-deep);
 }
 
 /* Mobile Drawer Nav */
